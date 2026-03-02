@@ -62,23 +62,26 @@ export default function MapView({ listings, selectedId, onSelectListing }: MapVi
                 const isSelected = listing.id === selectedId;
                 const scoreColor = listing.aiScore >= 8 ? '#00C851' : listing.aiScore >= 6 ? '#FFE500' : '#FF3B30';
 
-                // Create custom marker element (Security fix: avoid innerHTML to prevent XSS)
+                // Create a container element for Mapbox to position
+                const containerEl = document.createElement('div');
+                containerEl.style.zIndex = isSelected ? '10' : '1';
+                containerEl.style.cursor = 'pointer';
+                containerEl.addEventListener('click', () => onSelectListing(listing.id));
+
+                // Create the actual stylized marker element inside
                 const el = document.createElement('div');
-                el.className = styles.marker;
+                el.className = isSelected ? `${styles.marker} ${styles.markerSelected}` : styles.marker;
                 el.style.borderColor = isSelected ? '#0057FF' : '#0D0D0D';
                 el.style.background = isSelected ? '#0057FF' : scoreColor;
                 el.style.color = isSelected ? '#FFFFFF' : (listing.aiScore >= 6 && listing.aiScore < 8) ? '#0D0D0D' : '#FFFFFF';
-                el.style.transform = isSelected ? 'scale(1.3)' : 'scale(1)';
-                el.style.zIndex = isSelected ? '10' : '1';
 
                 const priceSpan = document.createElement('span');
                 // Sanitizing by using textContent rather than innerHTML
                 priceSpan.textContent = '$' + listing.pricePerWeek.toString();
                 el.appendChild(priceSpan);
+                containerEl.appendChild(el);
 
-                el.addEventListener('click', () => onSelectListing(listing.id));
-
-                const marker = new mapboxgl.default.Marker({ element: el })
+                const marker = new mapboxgl.default.Marker({ element: containerEl })
                     .setLngLat([listing.lng, listing.lat])
                     .addTo(mapRef.current);
 

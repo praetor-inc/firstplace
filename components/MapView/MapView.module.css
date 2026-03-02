@@ -52,8 +52,13 @@
 }
 
 .marker:hover {
-    transform: scale(1.1) !important;
+    transform: scale(1.1);
     box-shadow: 4px 4px 0 var(--ink);
+}
+
+.markerSelected {
+    transform: scale(1.3) !important;
+    box-shadow: 6px 6px 0 var(--ink);
 }
 
 /* Map fallback (no token) */
