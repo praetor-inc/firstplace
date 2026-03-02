@@ -107,7 +107,7 @@ export default function LandingPage() {
           </div>
           <h1 className={styles.heroTitle}>
             FIND YOUR <span className={styles.heroHighlight}>FIRST APARTMENT.</span><br />
-            NOT YOUR PARENTS'.
+            NOT YOUR PARENTS&apos;.
           </h1>
           <p className={styles.heroSub}>
             Tired of confusing real estate apps designed for 40-year-olds?

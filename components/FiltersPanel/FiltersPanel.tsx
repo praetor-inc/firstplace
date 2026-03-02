@@ -9,6 +9,7 @@ interface FiltersPanelProps {
         petFriendly: boolean | null;
         billsIncluded: boolean | null;
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange: (filters: any) => void;
     resultCount: number;
 }

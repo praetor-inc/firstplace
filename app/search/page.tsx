@@ -76,6 +76,7 @@ function SearchContent() {
 
     useEffect(() => {
         if (listings.length > 0 && !listings.find(l => l.id === selectedId)) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setSelectedId(listings[0].id);
         }
     }, [listings, selectedId]);

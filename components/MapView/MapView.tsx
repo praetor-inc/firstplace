@@ -11,7 +11,9 @@ interface MapViewProps {
 
 export default function MapView({ listings, selectedId, onSelectListing }: MapViewProps) {
     const mapContainerRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mapRef = useRef<any>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const markersRef = useRef<any[]>([]);
     const [mapLoaded, setMapLoaded] = useState(false);
 
