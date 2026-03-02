@@ -62,7 +62,7 @@ export default function MapView({ listings, selectedId, onSelectListing }: MapVi
                 const isSelected = listing.id === selectedId;
                 const scoreColor = listing.aiScore >= 8 ? '#00C851' : listing.aiScore >= 6 ? '#FFE500' : '#FF3B30';
 
-                // Create custom marker element
+                // Create custom marker element (Security fix: avoid innerHTML to prevent XSS)
                 const el = document.createElement('div');
                 el.className = styles.marker;
                 el.style.borderColor = isSelected ? '#0057FF' : '#0D0D0D';
@@ -70,7 +70,11 @@ export default function MapView({ listings, selectedId, onSelectListing }: MapVi
                 el.style.color = isSelected ? '#FFFFFF' : (listing.aiScore >= 6 && listing.aiScore < 8) ? '#0D0D0D' : '#FFFFFF';
                 el.style.transform = isSelected ? 'scale(1.3)' : 'scale(1)';
                 el.style.zIndex = isSelected ? '10' : '1';
-                el.innerHTML = `<span>$${listing.pricePerWeek}</span>`;
+
+                const priceSpan = document.createElement('span');
+                // Sanitizing by using textContent rather than innerHTML
+                priceSpan.textContent = '$' + listing.pricePerWeek.toString();
+                el.appendChild(priceSpan);
 
                 el.addEventListener('click', () => onSelectListing(listing.id));
 
