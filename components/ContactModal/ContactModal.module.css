@@ -1,0 +1,293 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 13, 13, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    background: var(--paper);
+    border: var(--border-thick);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: 540px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.25s ease;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@keyframes modalIn {
+    from {
+        transform: translateY(30px) scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    background: var(--ink);
+    color: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.closeBtn:hover {
+    background: var(--coral);
+    border-color: var(--coral);
+}
+
+/* Header */
+.header {
+    padding-right: 40px;
+}
+
+.headerLabel {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.listingTitle {
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.address {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-light);
+}
+
+/* Agent card */
+.agentCard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: var(--white);
+    border: var(--border);
+    border-radius: var(--radius);
+}
+
+.agentAvatar {
+    width: 48px;
+    height: 48px;
+    background: var(--yellow);
+    border: var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.agentName {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.agencyName {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    margin-top: 2px;
+}
+
+/* Contact buttons */
+.contactMethods {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contactBtn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.contactBtn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-md);
+}
+
+.phoneBtn {
+    background: var(--yellow);
+}
+
+.phoneBtn:hover {
+    background: var(--yellow-dark);
+}
+
+.emailBtn {
+    background: var(--white);
+}
+
+.emailBtn:hover {
+    background: var(--paper);
+}
+
+.contactIcon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.contactLabel {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+}
+
+.contactValue {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+/* Stats row */
+.listingStats {
+    display: flex;
+    gap: 12px;
+    padding: 14px;
+    background: var(--ink);
+    border: var(--border);
+    border-radius: var(--radius);
+}
+
+.stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.statLabel {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.1em;
+}
+
+.statValue {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--white);
+}
+
+/* AI Panel */
+.aiPanel {
+    background: var(--white);
+    border: var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aiHeader {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+    border-bottom: 2px solid var(--paper);
+    padding-bottom: 8px;
+}
+
+.aiSummary {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+}
+
+.positivesList,
+.flagsList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.positiveItem {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #007A3A;
+    font-weight: 600;
+}
+
+.flagItem {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--coral);
+    font-weight: 600;
+}
+
+.disclaimer {
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    text-align: center;
+    border-top: 2px solid var(--paper-dark);
+    padding-top: 12px;
+}
