@@ -53,6 +53,22 @@ export default function MapView({ listings, selectedId, onSelectListing }: MapVi
     }, []);
 
     useEffect(() => {
+        if (!mapLoaded || !mapContainerRef.current) return;
+
+        const resizeObserver = new ResizeObserver(() => {
+            if (mapRef.current) {
+                mapRef.current.resize();
+            }
+        });
+
+        resizeObserver.observe(mapContainerRef.current);
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, [mapLoaded]);
+
+    useEffect(() => {
         if (!mapRef.current || !mapLoaded) return;
 
         import('mapbox-gl').then((mapboxgl) => {
