@@ -1,5 +1,6 @@
 'use client';
 import { useEffect } from 'react';
+import { track } from '@vercel/analytics/react';
 import { Listing } from '@/lib/types';
 import styles from './ContactModal.module.css';
 
@@ -43,7 +44,11 @@ export default function ContactModal({ listing, onClose }: ContactModalProps) {
                 </div>
 
                 <div className={styles.contactMethods}>
-                    <a href={`tel:${listing.contactPhone.replace(/\s/g, '')}`} className={`${styles.contactBtn} ${styles.phoneBtn}`}>
+                    <a
+                        href={`tel:${listing.contactPhone.replace(/\s/g, '')}`}
+                        className={`${styles.contactBtn} ${styles.phoneBtn}`}
+                        onClick={() => track('Lead_Call', { listingId: listing.id, agent: listing.contactName })}
+                    >
                         <span className={styles.contactIcon}>📞</span>
                         <div>
                             <span className={styles.contactLabel}>CALL NOW</span>
@@ -53,6 +58,7 @@ export default function ContactModal({ listing, onClose }: ContactModalProps) {
                     <a
                         href={`mailto:${listing.contactEmail}?subject=Enquiry: ${encodeURIComponent(listing.title)}&body=Hi ${listing.contactName.split(' ')[0]}, I'm interested in ${listing.title} at ${listing.address}, ${listing.suburb}. Could you please arrange an inspection? Thanks.`}
                         className={`${styles.contactBtn} ${styles.emailBtn}`}
+                        onClick={() => track('Lead_Email', { listingId: listing.id, agent: listing.contactName })}
                     >
                         <span className={styles.contactIcon}>✉️</span>
                         <div>

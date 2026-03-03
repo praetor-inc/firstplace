@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { track } from '@vercel/analytics/react';
 import { Listing } from '@/lib/types';
 import styles from './ListingCard.module.css';
 import ContactModal from '../ContactModal/ContactModal';
@@ -36,9 +37,11 @@ export default function ListingCard({ listing, isSelected, onClick, compact }: L
         e.stopPropagation();
         setImgIndex((i) => (i === 0 ? listing.images.length - 1 : i - 1));
     };
-
     const toggleSave = (e: React.MouseEvent) => {
         e.stopPropagation();
+        if (!saved) {
+            track('Listing_Saved', { listingId: listing.id, title: listing.title });
+        }
         setSaved(s => !s);
     };
 
@@ -141,7 +144,11 @@ export default function ListingCard({ listing, isSelected, onClick, compact }: L
                     <div className={styles.actions}>
                         <button
                             className={`btn btn-primary btn-sm ${styles.enquireBtn}`}
-                            onClick={(e) => { e.stopPropagation(); setShowContact(true); }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                track('Enquire_Click', { listingId: listing.id, title: listing.title });
+                                setShowContact(true);
+                            }}
                         >
                             Enquire Now →
                         </button>
